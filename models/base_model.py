@@ -23,30 +23,16 @@ class BaseModel:
     """
 
     def __init__(self, *args, **kwargs):
+        s
          """Public instance artributes initialization
 
         Args:
-            *args(args): arguments
-            **kwargs(dict): attrubute values
-
+          
         """
-         DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
-          if not kwargs:
-              
-              self.id = str(uuid4())
-              self.created_at = datetime.utcnow()
-              self.updated_at = datetime.utcnow()
-          else:
-              
-              for key, value in kwargs.items():
-                  if key in ("updated_at", "created_at"):
-                    self.__dict__[key] = datetime.strptime(
-                        value, DATE_TIME_FORMAT)
-                elif key[0] == "id":
-                    self.__dict__[key] = str(value)
-                else:
-                    self.__dict__[key] = value
-         
+        self.id = str(uuid4())
+        self.created_at = datetime.utcnow()
+        self.updated_at = datetime.utcnow()
+        
     def __str__(self):
         """
         Returns string representation of the class
