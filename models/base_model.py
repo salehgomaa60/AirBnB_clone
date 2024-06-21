@@ -29,10 +29,11 @@ class BaseModel:
         Args:
           
         """
-        self.id = str(uuid4())
-        self.created_at = datetime.utcnow()
-        self.updated_at = datetime.utcnow()
-        
+         DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
+         self.id = str(uuid4())
+         self.created_at = datetime.utcnow()
+         self.updated_at = datetime.utcnow()
+         
     def __str__(self):
         """
         Returns string representation of the class
