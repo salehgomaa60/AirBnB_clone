@@ -47,11 +47,10 @@ class BaseModel:
         
     def to_dict(self):
         """
-        Method returns a dictionary containing all 
-        keys/values of __dict__ instance
+        Return dictionary of BaseModel with string formats of times
         """
-        temp = {**self.__dict__}
-        temp['__class__'] = type(self).__name__
-        temp['created_at'] = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        temp['updated_at'] = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        return temp
+        dic = self.__dict__.copy()
+        dic["created_at"] = self.created_at.isoformat()
+        dic["updated_at"] = self.updated_at.isoformat()
+        dic["__class__"] = self.__class__.__name__
+        return dic
