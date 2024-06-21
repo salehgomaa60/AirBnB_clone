@@ -1,35 +1,17 @@
 #!/usr/bin/python3
-"""
-this class is a base class for the project 
-"""
+"""This file defines  the BaseModel class which will
+serve as the base of ou model."""
 
 from uuid import uuid4
 from datetime import datetime
 import models
 
+
 class BaseModel:
-    """Custom base for all the classes in the AirBnb console project
-
-    Arttributes:
-        id(str): handles unique user identity
-        created_at: assigns current datetime
-        updated_at: updates current datetime
-
-    Methods:
-        __str__: prints the class name, id, and creates a dict representations.
-        save(self): updates instance arttributes with current datetime.
-        to_dict(self): returns the dictionary values of the instance object.
-
-    """
+    """ base class """
 
     def __init__(self, *args, **kwargs):
-        
-         """Public instance artributes initialization
-
-        Args:
-          
-        """
-         
+        """ serialize and deserialize class """
         if not kwargs:
             self.id = str(uuid4())
             self.created_at = datetime.utcnow()
@@ -52,22 +34,22 @@ class BaseModel:
         if "updated_at" in kwargs:
             self.updated_at = datetime.strptime(
                     kwargs['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
-            
+
     def __str__(self):
-        """
-        Returns string representation of the class
-        """
-        return "[{}] ({}) {}".format(self.__class__.__name__,
-                                     self.id, self.__dict__)
+        """overide str representation of self"""
+        fmt = "[{}] ({}) {}"
+        return fmt.format(
+            type(self).__name__,
+            self.id,
+            self.__dict__)
 
     def save(self):
-        """updates updated variable"""
+        """updating instance variable updated at """
         self.updated_at = datetime.utcnow()
-        
+        models.storage.save()
+
     def to_dict(self):
-        """
-        Return dictionary of BaseModel with string formats of times
-        """
+        """Returns a dictionary representation of the class """
         temp = {**self.__dict__}
         temp['__class__'] = type(self).__name__
         temp['created_at'] = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
