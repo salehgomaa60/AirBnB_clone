@@ -33,7 +33,7 @@ class BaseModel:
          DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
          self.id = str(uuid4())
          self.created_at = datetime.now()
-         self.update_at = datetime.now()
+         self.updated_at = datetime.now()
          
     def __str__(self):
         """
