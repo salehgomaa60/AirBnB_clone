@@ -22,7 +22,7 @@ class BaseModel:
 
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self):
          """Public instance artributes initialization
 
         Args:
@@ -31,35 +31,22 @@ class BaseModel:
 
         """
          DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
-        if not kwargs:
-            self.id = str(uuid4())
-            self.created_at = datetime.utcnow()
-            self.updated_at = datetime.utcnow()
-            models.storage.new(self)
-        else:
-            for key, value in kwargs.items():
-                if key in ("updated_at", "created_at"):
-                    self.__dict__[key] = datetime.strptime(
-                        value, DATE_TIME_FORMAT)
-                elif key[0] == "id":
-                    self.__dict__[key] = str(value)
-                else:
-                    self.__dict__[key] = value
-
+         self.id = str(uuid4())
+         self.created_at = datetime.now()
+         self.update_at = datetime.now()
+         
     def __str__(self):
         """
-        Returns string representation of the class
-        """
-        return "[{}] ({}) {}".format(self.__class__.__name__,
-                                     self.id, self.__dict__)
+returns a string representation of the class 
+"""
+        return "[{}] ({}) {}".format(self.__class__.name, self.id, self.__dict__)
 
     def save(self):
         """
-        Updates the public instance attribute:
-        'updated_at' - with the current datetime
-        """
-        self.updated_at = datetime.utcnow()
-        models.storage.save()
+updates the public instance attribute updated at with the current date time 
+"""
+        
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         """
@@ -74,4 +61,3 @@ class BaseModel:
                 map_objects[key] = value
         map_objects["__class__"] = self.__class__.__name__
         return map_objects
-    
