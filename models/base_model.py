@@ -47,7 +47,7 @@ class BaseModel:
     def save(self):
         """updating instance variable updated at """
         self.updated_at = datetime.utcnow()
-        models.storage.save()
+        models.storage.save(self)
 
     def to_dict(self):
         """Returns a dictionary representation of the class """

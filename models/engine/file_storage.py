@@ -18,7 +18,7 @@ from models.review import Review
 
 class FileStorage:
     """
-    This is  will serve as the database
+    This is  wil behave like a  database
     """
 
     """private class varaibles"""
