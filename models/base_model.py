@@ -5,7 +5,7 @@ serve as the base of ou model."""
 
 from uuid import uuid4
 from datetime import datetime
-import models
+import models import storage
 
 
 class BaseModel:
@@ -17,7 +17,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.utcnow()
             self.updated_at = datetime.utcnow()
-            models.storage.new(self)
+            storage.new(self)
             return
 
         """deserialize of kwargs"""
@@ -47,7 +47,7 @@ class BaseModel:
     def save(self):
         """updating instance variable updated at """
         self.updated_at = datetime.utcnow()
-        models.storage.save(self)
+        storage.save()
 
     def to_dict(self):
         """Returns a dictionary representation of the class """
