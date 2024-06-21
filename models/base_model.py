@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """This file defines  the BaseModel class which will
 serve as the base of ou model."""
 
@@ -16,7 +17,6 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.utcnow()
             self.updated_at = datetime.utcnow()
-            models.storage.new(self)
             return
 
         """deserialize of kwargs"""
@@ -46,7 +46,6 @@ class BaseModel:
     def save(self):
         """updating instance variable updated at """
         self.updated_at = datetime.utcnow()
-        models.storage.save()
 
     def to_dict(self):
         """Returns a dictionary representation of the class """
