@@ -22,18 +22,31 @@ class BaseModel:
 
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         
          """Public instance artributes initialization
 
         Args:
           
         """
-         DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
-         self.id = str(uuid4())
-         self.created_at = datetime.utcnow()
-         self.updated_at = datetime.utcnow()
-         
+        date_format = '%Y-%m-%dT%H:%M:%S.%f'
+        if kwargs:
+            for key, value in kwargs.items():
+                if "created_at" == key:
+                    self.created_at = datetime.strptime(kwargs["created_at"],
+                                                        date_format)
+                elif "updated_at" == key:
+                    self.updated_at = datetime.strptime(kwargs["updated_at"],
+                                                        date_format)
+                elif "__class__" == key:
+                    pass
+                else:
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.utcnow()
+            self.updated_at = datetime.utcnow()
+                 
     def __str__(self):
         """
         Returns string representation of the class
