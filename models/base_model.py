@@ -29,6 +29,7 @@ class BaseModel:
         Args:
           
         """
+         
         if not kwargs:
             self.id = str(uuid4())
             self.created_at = datetime.utcnow()
@@ -67,8 +68,8 @@ class BaseModel:
         """
         Return dictionary of BaseModel with string formats of times
         """
-        dic = self.__dict__.copy()
-        dic["created_at"] = self.created_at.isoformat()
-        dic["updated_at"] = self.updated_at.isoformat()
-        dic["__class__"] = self.__class__.__name__
-        return dic
+        temp = {**self.__dict__}
+        temp['__class__'] = type(self).__name__
+        temp['created_at'] = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        temp['updated_at'] = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        return temp
