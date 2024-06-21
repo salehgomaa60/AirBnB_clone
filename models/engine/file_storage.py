@@ -26,14 +26,10 @@ class FileStorage:
             d = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
             json.dump(d, f)
 
-def reload(self):
+
+    def reload(self):
         """
-        deserializes th jsonn file to __objects only if the JSON
-        
-        """
-        current_classes = {'BaseModel': BaseModel, 'User': User,
-                           'Amenity': Amenity, 'City': City, 'State': State,
-                           'Place': Place, 'Review': Review}
+        deserializes the JSON file to __objects only if the json file exists"""
 
         if not os.path.exists(FileStorage.__file_path):
             return
@@ -48,3 +44,4 @@ def reload(self):
 
             if deserialized is None:
                 return
+            
