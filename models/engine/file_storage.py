@@ -27,26 +27,11 @@ class FileStorage:
             json.dump(d, f)
 
     def reload(self):
-        """de-serialize persisted objects"""
-        try:
-            deserialized = {}
-            with open(FileStorage.__file_path, "r") as f:
-                deserialized = json.load(f)
-            for key, obj in deserialized.items():
-                cls_name = obj["__class__"]
-                if cls_name == "BaseModel":
-                    FileStorage.__objects[key] = BaseModel(**obj)
-                elif cls_name == "User":
-                    FileStorage.__objects[key] = User(**obj)
-                elif cls_name == "State":
-                    FileStorage.__objects[key] = State(**obj)
-                elif cls_name == "City":
-                    FileStorage.__objects[key] = City(**obj)
-                elif cls_name == "Amenity":
-                    FileStorage.__objects[key] = Amenity(**obj)
-                elif cls_name == "Place":
-                    FileStorage.__objects[key] = Place(**obj)
-                elif cls_name == "Review":
-                    FileStorage.__objects[key] = Review(**obj)
-        except (FileNotFoundError, JSONDecodeError):
-            pass
+        """Reloads the stored objects"""
+        if not os.path.isfile(FileStorage.__file_path):
+            return
+        with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+            obj_dict = json.load(f)
+            obj_dict = {k: self.classes()[v["__class__"]](**v)
+                        for k, v in obj_dict.items()}
+            FileStorage.__objects = obj_dict
