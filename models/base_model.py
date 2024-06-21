@@ -22,8 +22,8 @@ class BaseModel:
 
     """
 
-    def __init__(self, *args, **kwargs):
-        s
+    def __init__(self):
+        
          """Public instance artributes initialization
 
         Args:
