@@ -42,10 +42,7 @@ class BaseModel:
                                      self.id, self.__dict__)
 
     def save(self):
-        """
-        updates the public instance attribute
-       updated_at - with the current datetime
-        """
+        """updates updated variable"""
         self.updated_at = datetime.utcnow()
         
     def to_dict(self):
