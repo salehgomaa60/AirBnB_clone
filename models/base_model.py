@@ -7,13 +7,15 @@ from uuid import uuid4
 from datetime import datetime
 
 class BaseModel:
-    """base class """
-    def __init__(self):
-        """ constructor initializing the base class"""
-        self.id = str(uuid4())
-         self.created_at = datetime.utcnow()
-         self.updated_at = datetime.utcnow()
+    """Base class"""
 
+    def __init__(self):
+        """Initialize instance attributes."""
+        
+        self.id = str(uuid4())
+        self.created_at = datetime.utcnow()
+        self.updated_at = datetime.utcnow()
+        
     def __str__(self):
         """ str representation of object """
         fmt = "[{}] ({}) {}"
