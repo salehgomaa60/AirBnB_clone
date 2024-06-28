@@ -18,22 +18,21 @@ class BaseModel:
         
     def __str__(self):
         """ str representation of object """
+        
         fmt = "[{}] ({}) {}"
         return fmt.format(type(self).__name__, self.id, self.__dict__)
     
     def save(self):
         """updating instance variable updated at """
+        
         self.updated_at = datetime.utcnow()
+        
 
     def to_dict(self):
         """Convert instance attributes to dictionary."""
-        # Get the dictionary representation of instance attributes
+        
         obj_dict = self.__dict__.copy()
-
-        # Add __class__ key with the class name
         obj_dict['__class__'] = self.__class__.__name__
-
-        # Convert created_at and updated_at to ISO format strings
         obj_dict['created_at'] = self.created_at.isoformat()
         obj_dict['updated_at'] = self.updated_at.isoformat()
 
