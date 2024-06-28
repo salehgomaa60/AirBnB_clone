@@ -26,10 +26,16 @@ class BaseModel:
         self.updated_at = datetime.utcnow()
 
     def to_dict(self):
-        """Returns a dictionary representation of the class """
-        temp = {**self.__dict__}
-        temp['__class__'] = type(self).__name__
-        temp['created_at'] = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        temp['updated_at'] = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        return temp
+        """Convert instance attributes to dictionary."""
+        # Get the dictionary representation of instance attributes
+        obj_dict = self.__dict__.copy()
+
+        # Add __class__ key with the class name
+        obj_dict['__class__'] = self.__class__.__name__
+
+        # Convert created_at and updated_at to ISO format strings
+        obj_dict['created_at'] = self.created_at.isoformat()
+        obj_dict['updated_at'] = self.updated_at.isoformat()
+
+        return obj_dict
     
