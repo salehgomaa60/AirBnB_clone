@@ -45,6 +45,16 @@ class FileStorage:
                     FileStorage.__objects[key] = BaseModel(**obj)
                 elif cls_name == "User":
                     FileStorage.__objects[key] = User(**obj)
+                elif cls_name == "State":
+                    FileStorage.__objects[key] = State(**obj)
+                elif cls_name == "City":
+                    FileStorage.__objects[key] = City(**obj)
+                elif cls_name == "Amenity":
+                    FileStorage.__objects[key] = Amenity(**obj)
+                elif cls_name == "Place":
+                    FileStorage.__objects[key] = Place(**obj)
+                elif cls_name == "Review":
+                    FileStorage.__objects[key] = Review(**obj)    
                     
         except (FileNotFoundError, JSONDecodeError):
             pass
