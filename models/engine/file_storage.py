@@ -36,8 +36,6 @@ class FileStorage:
         try:
             with open(FileStorage.__file_path, 'r', encoding='utf-8') as f:
                 deserialized = json.load(f)
-                for key, value in deserialized.items():
-                class_name, obj_id = key.split('.')
 
         except json.JSONDecoderError:
             pass
