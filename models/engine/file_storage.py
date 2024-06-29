@@ -8,7 +8,7 @@ import os
 
 class FileStorage:
     """class for storing and retrieving data by json """
-    __file_path = ""
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
