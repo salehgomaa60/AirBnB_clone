@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" module for filestorage class """
+11;rgb:0000/0000/0000""" module for filestorage class """
 
 import datetime
 import json
@@ -35,13 +35,12 @@ class FileStorage:
 
         try:
             deserialized = {}
-            with open(FileStorage.__file_path, 'r', encoding='utf-8') as f:
+            with open(FileStorage.__file_path, "r") as f:
                 deserialized = json.load(f)
-                
-                 for key, value in deserialized.items():
-                    cls_name = obj["__class__"]
-                    if cls_name == 'BaseModel':
-                        FileStorage.__objects[key] = obj
-
+            for key, value in deserialized.items():
+                cls_name = obj["__class__"]
+                if cls_name == "BaseModel":
+                    FileStorage.__objects[key] = obj
+                    
         except(FileNotFoundError, JSONDecodeError)
             pass
