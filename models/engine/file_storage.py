@@ -39,7 +39,7 @@ class FileStorage:
             deserialized = {}
             with open(FileStorage.__file_path, "r") as f:
                 deserialized = json.load(f)
-            for key, value in deserialized.items():
+            for key, obj in deserialized.items():
                 cls_name = obj["__class__"]
                 if cls_name == "BaseModel":
                     FileStorage.__objects[key] = BaseModel(**obj)
