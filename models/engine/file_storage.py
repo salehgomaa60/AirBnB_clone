@@ -43,6 +43,8 @@ class FileStorage:
                 cls_name = obj["__class__"]
                 if cls_name == "BaseModel":
                     FileStorage.__objects[key] = BaseModel(**obj)
+                elif cls_name == "User":
+                    FileStorage.__objects[key] = User(**obj)
                     
         except (FileNotFoundError, JSONDecodeError):
             pass
