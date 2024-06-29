@@ -42,3 +42,5 @@ class FileStorage:
         except json.JSONDecoderError:
             pass
         
+        if deserialized is None:
+                return
