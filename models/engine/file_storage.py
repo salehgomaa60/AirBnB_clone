@@ -4,7 +4,7 @@
 import datetime
 import json
 import os
-
+from models.base_model import BaseModel
 
 class FileStorage:
     """class for storing and retrieving data by json """
@@ -40,7 +40,7 @@ class FileStorage:
             for key, value in deserialized.items():
                 cls_name = obj["__class__"]
                 if cls_name == "BaseModel":
-                    FileStorage.__objects[key] = obj
+                    FileStorage.__objects[key] = BaseModel(**obj)
                     
-        except json.JSONDecoderError:
+        except (FileNotFoundError, JSONDecodeError):
             pass
