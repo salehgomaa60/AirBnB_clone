@@ -46,3 +46,6 @@ class FileStorage:
                     
         except (FileNotFoundError, JSONDecodeError):
             pass
+        
+        if deserialized is None:
+            return
