@@ -33,14 +33,12 @@ class FileStorage:
         if not os.path.exists(FileStorage.__file_path):
             return
 
-        with open(FileStorage.__file_path, 'r') as f:
-            deserialized = None
-
-            try:
+        try:
+            with open(FileStorage.__file_path, 'r', encoding='utf-8') as f:
                 deserialized = json.load(f)
-            except json.JSONDecodeError:
-                pass
+                for key, value in deserialized.items():
+                class_name, obj_id = key.split('.')
 
-            if deserialized is None:
-                return
-            
+        except json.JSONDecoderError:
+            pass
+        
