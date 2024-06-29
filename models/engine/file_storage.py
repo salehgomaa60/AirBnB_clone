@@ -34,17 +34,14 @@ class FileStorage:
             return
 
         try:
+            deserialized = {}
             with open(FileStorage.__file_path, 'r', encoding='utf-8') as f:
                 deserialized = json.load(f)
                 
                  for key, value in deserialized.items():
-                    cls_name, obj_id = key.split('.')
+                    cls_name = obj["__class__"]
                     if cls_name == 'BaseModel':
-                        obj = BaseModel(**value)
                         FileStorage.__objects[key] = obj
 
-        except json.JSONDecoderError:
+        except(FileNotFoundError, JSONDecodeError)
             pass
-        
-        if deserialized is None:
-                return
