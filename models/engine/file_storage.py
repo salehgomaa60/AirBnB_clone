@@ -42,5 +42,5 @@ class FileStorage:
                 if cls_name == "BaseModel":
                     FileStorage.__objects[key] = obj
                     
-        except(FileNotFoundError, JSONDecodeError)
+        except(FileNotFoundError, JSONDecodeError):
             pass
